@@ -13,5 +13,5 @@ composer require "zhb/color-gradient"
 ## Examples
 
 <p align="center">
- <img src="doc/gradient.png" width="600">
+ <img src="doc/gradient.png" width="800">
 </p>
