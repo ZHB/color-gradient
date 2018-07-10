@@ -1,0 +1,19 @@
+{
+    "name": "zhb/color-gradient",
+    "description": "Library for determining the color of a value in defined color increments.",
+    "keywords": ["colors", "gradient"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vincent Huck",
+            "email": "vincent.huck.pro@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "autoload": {
+        "psr-4": { "Zhb\\Color\\": "src/Color" }
+    }
+}
