@@ -17,10 +17,10 @@ class ColorGradient
     /**
      * Return an hexadecimal color between a gradient colors range based on the current value.
      *
-     * @param int   $value
-     * @param int   $min
-     * @param int   $max
-     * @param array $gradientColors
+     * @param int   $value           Value to get the color
+     * @param int   $min             Minimal gradient value
+     * @param int   $max             maximal gradient value
+     * @param array $gradientColors  Colors range
      *
      * @throws MissingGradientColorException
      * @throws OutOfRangeException
@@ -30,27 +30,26 @@ class ColorGradient
     public static function numberToGradientColor(int $value, int $min, int $max, array $gradientColors): string
     {
         if ($min > $value) {
-            throw new OutOfRangeException(sprintf('$value must be greater than %d.', $min));
+            throw new OutOfRangeException(sprintf('Value must be greater than %d.', $min));
         }
 
         if ($max < $value) {
-            throw new OutOfRangeException(sprintf('$value must be smaller than %d.', $max));
+            throw new OutOfRangeException(sprintf('Value must be smaller than %d.', $max));
         }
 
-        if (2 > count($gradientColors)) {
+        if (2 > $gradientsCount = count($gradientColors)) {
             throw new MissingGradientColorException();
         }
 
         $distFromMin = $value / $max;
 
-        $startColor = $gradientColors[0];
-        $endColor = $gradientColors[1];
+        list($startColor, $endColor) = $gradientColors;
 
-        if (count($gradientColors) > 2) {
-            $startColor = $gradientColors[(int) floor($distFromMin * (count($gradientColors) - 1))];
-            $endColor = $gradientColors[(int) ceil($distFromMin * (count($gradientColors) - 1))];
+        if (2 < $gradientsCount) {
+            $startColor = $gradientColors[(int) floor($distFromMin * ($gradientsCount - 1))];
+            $endColor = $gradientColors[(int) ceil($distFromMin * ($gradientsCount - 1))];
 
-            $distFromMin *= count($gradientColors) - 1;
+            $distFromMin *= $gradientsCount - 1;
             while ($distFromMin > 1) {
                 --$distFromMin;
             }
